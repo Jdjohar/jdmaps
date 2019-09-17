@@ -1,9 +1,10 @@
 const express = require('express');
 const Datastore = require('nedb');
+
 const app = express();
 const port = process.env.PORT || 3000;
-app.listen(port, ()=> {
-    console.log('Starting server at ${port}');
+app.listen(port, () => {
+  console.log(`Starting server at ${port}`);
 });
 
 app.use(express.static('public'));
@@ -19,7 +20,6 @@ app.use('/api', (request, response) => {
     const timestamp = Date.now();
     data.timestamp = timestamp;
     database.insert(data);
-    console.log(database);
     response.json({
         status: 'success',
         timestamp: timestamp,
