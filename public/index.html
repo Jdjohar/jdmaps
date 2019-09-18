@@ -5,38 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""></script>
+<style>
+   #issMap
+   {
+height:580px;
+padding-bottom:30px;
+margin-bottom:80px;
+   }
+</style>
   </head>
   <body>
 
             <h2>
-                Edible Forest
+                Sample Project
             </h2>
           
-            <p>Sample is Here</p>
+            <p>Hello</p>
 
 
             <p>
                 Latitude: <span id="latitude"></span>&deg;<br>
                 Longitude: <span id="longitude"></span>&deg;<br>
-                Check Soil: <span id="limk"></span>
+                Link:
                
             </p>
+            <div id="issMap"></div>
 
 
-            <button id="geolocate">Find Soil</button>
+            <button id="geolocate">geolocate</button>
 
             <script>
+              
  document.getElementById('geolocate').addEventListener('click', event => {
 
             if ("geolocation" in navigator) {
   console.log('geolocation is available');
 
   navigator.geolocation.getCurrentPosition(async position=> {
+    const mymap = L.map('issMap').setView([0, 0], 1);
+    
+    const attribution = 
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap </a> contributors';
+                    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                    const tiles = L.tileLayer(tileUrl, { attribution });
+                    tiles.addTo(mymap);
 
+
+    const api_url = 'https://api.wheretheiss.at/v1/satellites/25544';
     const lat =position.coords.latitude;
     const lon =position.coords.longitude;
-    var lin = '<a target="_blank" href="https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'"><span id="geolocate">Click Here</span></a>'
-     document.getElementById('latitude').textContent = lat;
+    var lin = 'https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'<a target="_blank" href="https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'"><button id="geolocate">Go to Link</button></a>'
+    const marker = L.marker([0, 0]).addTo(mymap);
+    document.getElementById('latitude').textContent = lat;
     document.getElementById('longitude').textContent = lon;
     document.getElementById('limk').innerHTML = lin;
  //console.log(position);
