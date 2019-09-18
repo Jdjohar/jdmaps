@@ -29,10 +29,13 @@ app.use('/api', (request, response) => {
     });
 });
 
-app.use('/soil  ', async (request, response) => {
-//const api_url =`https://rest.soilgrids.org/query?lon=${lon}&lat=${lat}`;
-const api_url =`https://api.darksky.net/forecast/1c46b1683e2cfd04ae7a8d4d6994e4ab/37.8267,-122.4233`;
+
+
+
+app.get('/soil', async (request, response) => {
+const api_url =`https://rest.soilgrids.org/query?lon=${lon}&lat=${lat}`;
+//const api_url =`https://api.darksky.net/forecast/1c46b1683e2cfd04ae7a8d4d6994e4ab/37.8267,-122.4233`;
 const fetch_response = await fetch(api_url);
-const json = fetch_response.json();
-console.log(json);
+const json = fetch_response.json(); 
+console.json(json);
 });

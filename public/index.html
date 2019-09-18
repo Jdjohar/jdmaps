@@ -17,13 +17,49 @@
 
             <p>
                 Latitude: <span id="latitude"></span>&deg;<br>
-                Longitude: <span id="longitude"></span>&deg;
-
+                Longitude: <span id="longitude"></span>&deg;<br>
+                Link: <span id="limk"></span>
+               
             </p>
 
 
             <button id="geolocate">geolocate</button>
 
-            <script src="script.js"></script>
+            <script>
+ document.getElementById('geolocate').addEventListener('click', event => {
+
+            if ("geolocation" in navigator) {
+  console.log('geolocation is available');
+
+  navigator.geolocation.getCurrentPosition(async position=> {
+
+    const lat =position.coords.latitude;
+    const lon =position.coords.longitude;
+    var lin = 'https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'<a target="_blank" href="https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'"><button id="geolocate">Go to Link</button></a>'
+     document.getElementById('latitude').textContent = lat;
+    document.getElementById('longitude').textContent = lon;
+    document.getElementById('limk').innerHTML = lin;
+ //console.log(position);
+const data = { lat, lon};
+const options = {
+    method:'POST',
+    headers:{
+        'Content-Type': 'application/json'
+    },   
+    body: JSON.stringify(data)
+};
+const response = await fetch ('/api', options);
+const json = await response.json();
+console.log(json); 
+});
+} else {
+    console.log('geolocation IS NOT available');
+}
+});
+
+
+
+            </script>
+
         </body>
 </html>

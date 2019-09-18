@@ -10,15 +10,24 @@ const lat =position.coords.latitude;
 const lon =position.coords.longitude;
 document.getElementById('latitude').textContent = lat;
 document.getElementById('longitude').textContent = lon;
-const api_url =`soil/query?lon=${lon}&lat=${lat}`;
-//const api_url =`/soil`;
+//const api_url =`soil/query?lon=${lon}&lat=${lat}`;
+const api_url =`/soil`;
 const response = await fetch (api_url);
 const json = await response.json();
 console.log(json);
+});
+
+} else {
+console.log('geolocation IS NOT available');
+}
+});
 
 
-//console.log(position);
-const data = { lat, lon};
+
+
+
+//console.log(position);  code cut from line number 18
+/*const data = { lat, lon};
 const options = {
 method:'POST',
 headers:{
@@ -29,8 +38,4 @@ body: JSON.stringify(data)
 const response = await fetch ('/api', options);
 const json = await response.json();
 console.log(json);
-});
-} else {
-console.log('geolocation IS NOT available');
-}
-});
+});*/
