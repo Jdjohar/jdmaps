@@ -9,21 +9,21 @@
   <body>
 
             <h2>
-                Sample Project
+                Edible Forest
             </h2>
           
-            <p>Hello</p>
+            <p>Sample is Here</p>
 
 
             <p>
                 Latitude: <span id="latitude"></span>&deg;<br>
                 Longitude: <span id="longitude"></span>&deg;<br>
-                Link:
+                Check Soil: <span id="limk"></span>
                
             </p>
 
 
-            <button id="geolocate">geolocate</button>
+            <button id="geolocate">Find Soil</button>
 
             <script>
  document.getElementById('geolocate').addEventListener('click', event => {
@@ -35,7 +35,7 @@
 
     const lat =position.coords.latitude;
     const lon =position.coords.longitude;
-    var lin = 'https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'<a target="_blank" href="https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'"><button id="geolocate">Go to Link</button></a>'
+    var lin = '<a target="_blank" href="https://rest.soilgrids.org/query?lon='+lon+'&lat='+lat+'"><span id="geolocate">Click Here</span></a>'
      document.getElementById('latitude').textContent = lat;
     document.getElementById('longitude').textContent = lon;
     document.getElementById('limk').innerHTML = lin;
